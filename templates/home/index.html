@@ -1,0 +1,126 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block content %}
+{% include 'home/navbar.html' %}
+{% include 'home/header.html' %}
+<main id="main" class="container">
+  <!-- ====== Login and Sign up -->
+  {% if not user.is_authenticated %}
+    <div class="row">
+      <div class="col-12 text-center m-4 p-2"  data-aos="fade-up">
+        <h1>Get Started</h1>
+      </div>
+    <div class="container mt-5 mb-5">
+      <div class="row">
+        <div class="col-md-6" data-aos="fade-up">
+          <form method="POST" action="{% url 'users:signup' %}" class="text-left card p-5 shadow" enctype="multipart/form-data">{% csrf_token %} 
+            <h3 class="card-title">Sign up</h3> 
+            {{signupform.media}}               
+            {{ signupform.as_p}}
+            <!-- User Type -->
+            <div class="form-group text-center">
+                <input id="register" type="submit" value="Register" class="btn btn-dark">
+            </div>
+        </form>
+        </div>
+        <div class="col-md-6" data-aos="fade-up">
+          <form method="POST" action="{% url 'users:login' %}" class="text-left card p-5 shadow">{% csrf_token %} 
+            <h3 class="card-title">Log in</h3>                 
+            {{ loginform.as_p}}
+            <!-- User Type -->
+            <div class="form-group text-center">
+                <input id="register" type="submit" value="Login" class="btn btn-outline-secondary">
+            </div>
+        </form>
+        </div>
+      </div>
+    </div>
+    </div>
+  {% endif %}
+  <!-- ======= About Section ======= -->
+  <section id="about" class="about">
+
+    <div class="container" data-aos="fade-up">
+      <div class="row">
+
+        <div class="col-lg-5 col-md-6">
+          <div class="about-img" data-aos="fade-right" data-aos-delay="100">
+            <img class="img-fluid" src="{% static 'assets/img/about.png' %}" alt="">
+          </div>
+        </div>
+
+        <div class="col-lg-7 mt-auto p-0 col-md-6">
+          <div class="about-content" data-aos="fade-left" data-aos-delay="100">
+            <h2 class="h2">About Us</h2>
+            <h3>Short info about us.</h3>
+            <p>We are an organization aiming to connect young Africans with great talent and potentials who lacks support to individuals or organizations who are willing to help them achieve their goals.</p>
+            <p>All you need is to sig up if you are new or sign in if you already have an account and create your profile and add your tallent or what you can do, you will be notified if someone is willing to help you .</p>
+            <ul class="list-unstyled">
+              <li ><i class="fa fa-diamond"></i> Sign up.</li>
+              <li><i class="fa fa-diamond"></i> Post your talent.</li>
+              <li><i class="fa fa-diamond"></i> Wait patiently.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section><!-- End About Section -->
+
+
+  <!-- ======= Services Section ======= -->
+  <section id="services" class="services section-bg m-5">
+    <div class="container" data-aos="fade-up">
+
+      <header class="section-header text-center m-5">
+        <h3>Services</h3>
+        <p>Connect young Africans with great potentials to people willing to help lift them higher.</p>
+      </header>
+  </section><!-- End Services Section -->
+
+  <!-- ======= Why Us Section ======= -->
+  <section id="why-us" class="why-us">
+    <div class="container-fluid" data-aos="fade-up">
+
+      <header class="section-header">
+        <h3>Why choose us?</h3>
+        <p>We try our best to publish and notify any organization who is to help youth look at through the site.</p>
+      </header>
+
+      <div class="row">
+
+        <div class="col-lg-6" data-aos="zoom-in" data-aos-delay="100">
+          <div class="why-us-img">
+            <img src="{% static 'assets/img/5.jpg' %}" alt="" class="img-fluid">
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="why-us-content">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem dignissimos expedita nulla voluptatum veniam debitis laborum optio possimus ea tempore omnis fugiat, magnam, dolorum quas laudantium provident unde quis. Recusandae.</p>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, autem possimus a eos sit facilis asperiores exercitationem impedit sunt, fugiat nisi ut vero repellendus totam, corrupti laborum? Est, itaque unde.
+            </p>
+
+            <div class="features clearfix" data-aos="fade-up" data-aos-delay="100">
+              <i class="fa fa-diamond" style="color: #f058dc;"></i>
+              <h4>Lorem ipsum dolor</h4>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum itaque nihil atque veritatis, reiciendis vel, aspernatur consectetur quisquam quibusdam amet consequatur qui ducimus quos perspiciatis, adipisci reprehenderit rem delectus ea?.</p>
+            </div>
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+   
+  </section><!-- End Why Us Section -->
+</main>
+{% include 'home/footer.html' %}
+{% endblock %}
+

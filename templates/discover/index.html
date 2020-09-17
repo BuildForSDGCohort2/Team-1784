@@ -1,0 +1,27 @@
+{% extends "home/base.html" %} {% block content %}
+{% include 'home/navbar.html' %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-2 mt-5">
+            <div class="text-left" data-aos="zoom-in" data-aos-delay="300">
+                <img src="{{ user.profile_picture.url }}" alt="Profile" class="card-img img-fluid">
+                <div data-aos="zoom-in" data-aos-delay="500">
+                    <p>Full Name  - <strong>{{user.first_name}} {{user.last_name}}</strong> </p>  
+                  <p>Email - <strong>{{user.email}}</strong></p>
+                  <p>Gender - <strong>{{user.gender }}</strong>  </p>
+                  <p>User-Type  - <strong>{{user.userType}}</strong></p>
+                </div>
+                 
+            </div>
+        </div>
+        <div class="col-6 mt-5">
+            
+        </div>       
+    </div>
+</div>
+
+
+{% include 'home/footer.html' %}
+
+{% endblock content %}
