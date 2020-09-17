@@ -2,4 +2,5 @@ __pycache__/
 *.sqlite
 *.sqlite3
 migrations/
+static_cdn_test/
 *.vscode/
