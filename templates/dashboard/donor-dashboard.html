@@ -1,0 +1,74 @@
+{% extends "home/base.html" %} {% block content %}
+{% include 'home/navbar.html' %}
+<section class="container-fluid">
+<div class="row mt-5">
+    <div class="col-2"></div>
+    <div class="col-8 mt-5">
+        {% for ruser in duser.selected.all %}
+            <div class="section-top-border">
+                <div class="row mb-3">
+                    <div class="col-md-3 text-center">
+                    <button class="btn" data-toggle="modal" data-target="#Reg{{ruser.id}}">
+                        <img src="{{ruser.user.profile_picture.url}}" style="height: 150px; width: 150px;" class="img-fluid rounded-circle">
+                    </button> 
+                    </div>
+                    <div class="col-md-8 text-center">
+                        <button class="btn" data-toggle="modal" data-target="#Reg{{ruser.id}}">
+                            <p>{{ruser.brief_introduction|truncatewords:30 }}</p>
+                        </button>
+                    </div>
+                    <div class="col-md-1 text-center">
+                        <form class="form-check-inline" action="{% url 'discover:remove1' ruser.id %}">
+                            <button class="btn btn-danger">Remove</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+</section>
+
+
+{% for reguser in duser.selected.all %}
+    <div class="modal fade" id="Reg{{reguser.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-fullscreen" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-0 ">
+                    
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row ">
+                        <div class="col-md-3 mt-md-5">
+                            <div class="text-left" data-aos="zoom-in" data-aos-delay="300">
+                                  <p>Full Name  - <strong>{{reguser.user.first_name}} {{reguser.user.last_name}}</strong> </p>  
+                                  <p>Email - <strong>{{reguser.user.email}}</strong></p>
+                                  <p>Gender - <strong>{{reguser.user.gender }}</strong>  </p>
+                                  <p>User-Type  - <strong>{{reguser.user.userType}}</strong></p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 m-md-5"  data-aos="zoom-in" data-aos-delay="400">
+                            <p>Bio  - <strong>{{reguser.brief_introduction}}</strong> </p>  
+                            <p>Age - <strong>{{reguser.age}}</strong></p>
+                            <p>Country - <strong>{{reguser.country }}</strong>  </p>
+                            <p>Region or State  - <strong>{{reguser.region_or_state}}</strong></p>
+                            <p>City  - <strong>{{reguser.city}}</strong></p>
+                            <p>Interest  - <strong>{{reguser.interest}}</strong></p>
+                            <p>Level of Education  - <strong>{{reguser.education_level}}</strong></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+{% include 'home/footer.html' %}
+
+{% endblock content %}

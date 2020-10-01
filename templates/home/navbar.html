@@ -6,15 +6,17 @@
           </button>
       <div class="collapse navbar-collapse " id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
+          {% if user.is_authenticated %}
           <li class="nav-item active">
-            <a class="nav-link" href="/">Home
+            <a class="nav-link" href="{% url 'discover:index' %}">Home
                   <span class="sr-only">(current)</span>
                 </a>
           </li>
+          {% if user.userType == 'Donor / organization' %}
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'home:contact' %}">Contact</a>
+            <a class="nav-link" href="{% url 'dashboard:duser' %}">Dashboard</a>
           </li>
-          {% if user.is_authenticated %}
+          {% endif %}
           <li class="nav-item">
             <a class="nav-link" href="{% url 'profiles:profile' %}">Profile</a>
           </li>
@@ -22,6 +24,14 @@
                 <a class="nav-link" href="{% url 'users:logout' %}">Log out</a>
               </li>
             {% else %}
+            <li class="nav-item active">
+              <a class="nav-link" href="/">Home
+                    <span class="sr-only">(current)</span>
+                  </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'home:contact' %}">Contact</a>
+            </li>
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'users:login' %}">Sign in</a>
               </li>

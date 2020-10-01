@@ -9,6 +9,7 @@ urlpatterns = [
     path('user/', include('users.urls')),
     path('profile/', include('profiles.urls')),
     path('discover/', include('discover.urls')),
+    path('dashboard/', include('usersDashboard.urls')),
 ]
 
 if settings.DEBUG:

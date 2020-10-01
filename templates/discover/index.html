@@ -1,26 +1,37 @@
 {% extends "home/base.html" %} {% block content %}
 {% include 'home/navbar.html' %}
 
-<div class="container">
+<div class="container mt-5 p-5">
     <div class="row">
-        <div class="col-md-2 mt-5">
-            <div class="text-left" data-aos="zoom-in" data-aos-delay="300">
-                <img src="{{ user.profile_picture.url }}" alt="Profile" class="card-img img-fluid">
-                <div data-aos="zoom-in" data-aos-delay="500">
-                    <p>Full Name  - <strong>{{user.first_name}} {{user.last_name}}</strong> </p>  
-                  <p>Email - <strong>{{user.email}}</strong></p>
-                  <p>Gender - <strong>{{user.gender }}</strong>  </p>
-                  <p>User-Type  - <strong>{{user.userType}}</strong></p>
-                </div>
-                 
+        <div class="col-12" data-aos="zoom-out" data-aos-delay="300">
+            <div class="text-center">
+                <h3>Discover Africans Potentials</h3>
             </div>
         </div>
-        <div class="col-6 mt-5">
-            
-        </div>       
+    </div>
+
+    <div class="row mt-5">
+        {% for post in grievances %}
+        {% if post.body %}
+        
+        <div class="col-12 col-md-6 col-lg-4"  data-aos="zoom-in" data-aos-delay="400">
+            <div class="card shadow rounded-bottom">
+                {% if post.thumbnail %}
+                <a href="{% url 'discover:detail' post.id %}" class="btn "><img src="{{post.thumbnail.url}}" class="img-fluid" style="height: 200px; width: 100%; "></a>
+               {% endif %}
+                <div class="p-4">
+                    <a href="{% url 'discover:detail' post.id %}" class="btn"><h4>{{post.title|truncatewords:4}}</h4></a>
+                    <div class="meta d-flex align-items-center">
+                        <small>{{post.date}}</small>
+                    </div>
+                    <p>{{post.body|truncatewords:10}}</p>
+                </div>                               
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
     </div>
 </div>
-
 
 {% include 'home/footer.html' %}
 

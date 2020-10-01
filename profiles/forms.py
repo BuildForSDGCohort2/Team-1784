@@ -62,22 +62,17 @@ class DonorForm(ModelForm):
       }, choices=Type_choice)) 
     class Meta:
         model = Donor
-        exclude =('user',)
+        exclude =('user','selected')
     
 class GrievanceForm(ModelForm):
-    talent = forms.CharField(label=False, widget=forms.TextInput(attrs={
+    title = forms.CharField(label=False, widget=forms.TextInput(attrs={
         'class':'form-control mb-3',
-        'id':'name',
-        'placeholder':'What can you do best'
+        'placeholder':'Title'
         }))
-    help_you_need = forms.CharField(widget=forms.TextInput(attrs={
-      'class':'form-control mb-3',
-      'id':'name',
-      'placeholder':'What help you wish to get'
-      })) 
-    demo_in_text = forms.CharField(label=False,widget=forms.Textarea({
+
+    body = forms.CharField(label=False,widget=forms.Textarea({
         'class': 'form-control mb-3',
-        'placeholder': 'If your talent can be expressed in text, demo here'
+        'placeholder': 'Brief description'
     }))
     class Meta:
         model = Grievance

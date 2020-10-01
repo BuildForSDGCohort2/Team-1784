@@ -1,72 +1,100 @@
 {% extends "home/base.html" %} {% block content %}
-<section class="container mb-5">
- <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="/">Africans Potentials</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="/">Home
-                  <span class="sr-only">(current)</span>
-                </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'home:contact' %}">Contact</a>
-          </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'users:logout' %}">Log out</a>
-              </li>    
-        </ul>
+
+  <div class="shadow container-fluid" style="background-image: url({{ user.profile_picture.url }});">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top ">
+      <div class="container">
+        <a class="navbar-brand" href="/">Africans Potentials</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'discover:index' %}">Home
+                    <span class="sr-only">(current)</span>
+                  </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'home:contact' %}">Contact</a>
+            </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'users:logout' %}">Log out</a>
+                </li>    
+          </ul>
+        </div>
       </div>
-    </div>
-</nav>   
-</section>
+    </nav>   
+  <div class="m-5">
+    <img src="{{ user.profile_picture.url }}" data-aos="flip-left" data-aos-delay="500" alt="Profile" class="card-img img-fluid rounded-circle shadow" style="height: 300px; width: 300px;">
+  </div>
+</div>
+
+
+
 <div class="container">
     <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6 mt-5">
-            <div class="text-center" data-aos="zoom-in" data-aos-delay="300">
-                <img src="{{ user.profile_picture.url }}" alt="Profile" class="card-img img-fluid">
+        <div class="col-md-3 mt-md-5">
+            <div class="text-left" data-aos="zoom-in" data-aos-delay="300">
                   <p>Full Name  - <strong>{{user.first_name}} {{user.last_name}}</strong> </p>  
                   <p>Email - <strong>{{user.email}}</strong></p>
                   <p>Gender - <strong>{{user.gender }}</strong>  </p>
                   <p>User-Type  - <strong>{{user.userType}}</strong></p>
             </div>
         </div>
+        <div class="col-md-3 m-md-5"  data-aos="zoom-in" data-aos-delay="400">
+            <p>Bio  - <strong>{{profile.brief_introduction}}</strong> </p>  
+            <p>Age - <strong>{{profile.age}}</strong></p>
+            <p>Country - <strong>{{profile.country }}</strong>  </p>
+            <p>Region or State  - <strong>{{profile.region_or_state}}</strong></p>
+            <p>City  - <strong>{{profile.city}}</strong></p>
+            <p>Interest  - <strong>{{profile.interest}}</strong></p>
+            <p>Level of Education  - <strong>{{profile.education_level}}</strong></p>
+  
+          <div class="bd-example">
+            <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#reguserModal">
+              Edit Profile
+            </button>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="slide-left" >
+        <img src="{{ g.thumbnail.url }}" class="img-fluid img-rounded" style="height: 300px;"><br>
+        <small class="text-muted">{{g.date}}</small>
+        <h1 class="h2">{% if g.body %} {{g.title}} {% endif %}</h1>
+        <p>{% if g.body %} {{g.body}} {% else %} Complete your Profile by clicking on the button below {% endif %}</p>
+        <a href="{% url 'profiles:guser' %}" class="btn btn-dark">Edit My Grievance</a>
+        </div>
+          <div id="reguserModal" class="modal" role="dialog" aria-labelledby="regUserLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="regUserLabel">{{user}} Profile edit</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="form-inner">
+                      <small class="text-danger ">
+                        {{ form.non_field_errors }}
+                      </small>
+            
+                      <form method="POST" action="{% url 'profiles:reguser' %}" class="text-left" data-aos="fade-in" data-aos-delay="400" >{% csrf_token %}
+                        {{form.as_p}}
+                        
+                          <div class="form-group text-center" data-aos="fade out">
+                              <input id="register" type="submit" value="Save" class="btn btn-dark" >
+                          </div>
+                      </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> 
+          
+          
     </div>
 </div>
 
-    <section class="container" data-aos="zoom-out" data-aos-delay="200">
-       <div class="row">
-           <div class="col-md-3"></div>
-           <div class="col-md-6">
-            <div class="m-5 p-4 text-center ">
-                <div class="form-inner">
-                    <small class="text-danger ">
-                {{ form.non_field_errors }}
-            </small>
-    
-                    <form method="POST" action="{% url 'profiles:reguser' %}" class="text-left" data-aos="fade-in" data-aos-delay="400" >{% csrf_token %}
-                      {{form.as_p}}
-                        <!-- User Type -->
-                        <div class="form-group text-center" data-aos="fade out">
-                            <input id="register" type="submit" value="Save" class="btn btn-dark" >
-                        </div>
-                    </form>
-                </div>
-                <div data-aos="fade-in">
-                  <div class="copyrights text-center">
-                      <p><a href="{% url 'home:index' %}" class="btn">Africans Potentials</a></p>         
-                  </div>
-                </div>
-               
-            </div>
-           </div>
-       </div>
-    </section>
 {% include 'home/footer.html' %}
 
 {% endblock content %}

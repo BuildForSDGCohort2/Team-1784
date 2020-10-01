@@ -1,0 +1,55 @@
+{% extends "home/base.html" %} {% block content %}
+{% include 'home/navbar.html' %}
+
+<div class="container mt-5 p-5">
+  {% if messages %} 
+  <div class="row">
+    {% for message in messages %}
+        <div class=" alert with-close alert-success alert-dismissible fade show" role="alert alert{{message.tags}}">
+            {{message}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+            </button>
+        </div>
+    {% endfor%}
+
+  </div>{% endif %}
+    <div class="row">
+        <div class="row row-pb-lg">
+            <div class="col-md-6">
+                <img src="{{post.thumbnail.url}}" class="img-fluid" style="height: 300px; width: 300px;">
+            </div>
+            <div class="col-md-6">
+                <h1>{{post.title}}</h1>
+                <small class="m-3">{{post.date}}</small>
+                <p class="mt-4">{{post.body}}</p>
+                {% if user.userType == 'Donor / organization' %}
+                {% if added %}
+                <form class="form-check-inline" action="{% url 'discover:remove' post.id %}">
+                  <button class="btn btn-danger">Remove</button>
+                </form>
+                {% else %}
+                <form class="form-check-inline" action="{% url 'discover:add' post.id %}">
+                  <button class="btn btn-primary">Help</button>
+                </form>
+                {% endif %}
+                {% endif %}
+                <button class="btn btn-success" data-toggle="modal" data-target="#reguserModal">Share</button>
+
+                <div id="reguserModal" class="modal" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal" role="document">
+                      <div class="modal-content text-center">
+                        <div class="modal-body ">
+                          <p><span>URL :</span> {% url 'discover:detail' post.id %}</p>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'home/footer.html' %}
+
+{% endblock content %}

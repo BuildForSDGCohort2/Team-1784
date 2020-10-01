@@ -18,7 +18,7 @@ def loginView(request):
             login(request,user)
             if next1:
                 return redirect(next1)
-        return redirect(reverse('home:index'))
+        return redirect(reverse('discover:index'))
     context = {
         'form': form
     }

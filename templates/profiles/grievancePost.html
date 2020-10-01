@@ -46,7 +46,7 @@
                         {{ form.non_field_errors }}
                     </small>
     
-                    <form method="POST" action="{% url 'profiles:guser' %}" class="text-left" data-aos="fade-in" data-aos-delay="400" >{% csrf_token %}
+                    <form method="POST" action="{% url 'profiles:guser' %}" enctype="multipart/form-data" class="text-left" data-aos="fade-in" data-aos-delay="400" >{% csrf_token %}
                       {{form.as_p}}
                         <!-- User Type -->
                         <div class="form-group text-center" data-aos="fade out">
