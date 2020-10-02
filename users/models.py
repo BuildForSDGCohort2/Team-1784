@@ -13,7 +13,7 @@ UserType = (
 )
 class User(AbstractUser):
     profile_picture = models.ImageField(default='profile_pictures/default.png' , upload_to='profilepictures')
-    phone_number = models.IntegerField( blank=True, null=True)
+    phone_number = models.CharField(max_length=15, blank=True, null=True)
     userType = models.CharField(choices=UserType, max_length=50, blank=True,null=True)
     gender = models.CharField(choices=Gender, max_length=50)
  

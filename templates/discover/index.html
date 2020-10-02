@@ -9,28 +9,26 @@
             </div>
         </div>
     </div>
-
-    <div class="row mt-5">
-        {% for post in grievances %}
+</div>
+<div class="container-fluid">
+    {% for post in grievances %}
         {% if post.body %}
-        
-        <div class="col-12 col-md-6 col-lg-4"  data-aos="zoom-in" data-aos-delay="400">
-            <div class="card shadow rounded-bottom">
-                {% if post.thumbnail %}
-                <a href="{% url 'discover:detail' post.id %}" class="btn "><img src="{{post.thumbnail.url}}" class="img-fluid" style="height: 200px; width: 100%; "></a>
-               {% endif %}
-                <div class="p-4">
-                    <a href="{% url 'discover:detail' post.id %}" class="btn"><h4>{{post.title|truncatewords:4}}</h4></a>
-                    <div class="meta d-flex align-items-center">
-                        <small>{{post.date}}</small>
-                    </div>
-                    <p>{{post.body|truncatewords:10}}</p>
-                </div>                               
+        <div class="row mt-2 mb-3 pl-5 shadow-sm">
+            {% if post.thumbnail %}
+            <div class="col-md-2 text-center" data-aos="zoom-in" data-aos-delay="400">
+                <a href="{% url 'discover:detail' post.id %}" class="btn "><img src="{{post.thumbnail.url}}" class="img-fluid rounded-circle shadow" style="height: 100px; width: 100px; "></a>  
             </div>
+            {% endif %}
+            <div class="col-md-8" data-aos="zoom-in" data-aos-delay="300">
+                <a href="{% url 'discover:detail' post.id %}" class="btn"><h4>{{post.title}}</h4></a>
+                <div class="meta d-flex align-items-center">
+                    <small>{{post.date}}</small>
+                </div>
+                <p>{{post.body|truncatewords:20}}</p>
+            </div>                               
         </div>
         {% endif %}
-        {% endfor %}
-    </div>
+    {% endfor %}
 </div>
 
 {% include 'home/footer.html' %}

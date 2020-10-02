@@ -45,7 +45,8 @@ class RegularUserForm(ModelForm):
             'placeholder':'Write a brief introduction about you'
         }
     ))
-    
+    show_info = forms.BooleanField(required=False,label="keep my info public")
+    always_show_info = forms.BooleanField(required=False,label="Always keep my info public")
     class Meta:
         model = RegularUser 
         exclude =('user',)

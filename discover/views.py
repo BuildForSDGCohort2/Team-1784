@@ -7,8 +7,11 @@ from django.contrib import messages
 @login_required
 def discoverView(request):
     grievances = Grievance.objects.all()
+    user = request.user
+    added = False
     context = {
         'grievances': grievances,
+        'added': added,
         'title': 'Discover Africans Potentials'
     }
     return render(request, 'discover/index.html', context)
@@ -19,23 +22,24 @@ def discoverDetail(request, id):
     reguser = RegularUser.objects.get(grievance=id)
     postDetail = get_object_or_404(Grievance, id=id)
     user = request.user
-    duser = get_object_or_404(Donor,user=user)
     added = False
-    if duser.selected.filter(id=reguser.id):
-        added = True
-        context = {
-        'added': added,
-        'post': postDetail,
-        'title': f'{reguser.user} details',
-        }
-        return render(request, 'discover/detail.html', context)
-    else:
-        context = {
-        'added': added,
-        'post': postDetail,
-        'title': f'{reguser.user} details',
-        }
-        return render(request, 'discover/detail.html', context)
+    if user.userType == 'Donor / organization':
+        duser = get_object_or_404(Donor,user=user)
+        if duser.selected.filter(id=reguser.id):
+            added = True
+            context = {
+            'added': added,
+            'post': postDetail,
+            'title': f'{reguser.user} details',
+            }
+            return render(request, 'discover/detail.html', context)
+    
+    context = {
+    'added': added,
+    'post': postDetail,
+    'title': f'{reguser.user} details',
+    }
+    return render(request, 'discover/detail.html', context)
 
     
 @login_required

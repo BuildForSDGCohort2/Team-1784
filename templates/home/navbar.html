@@ -16,6 +16,12 @@
           <li class="nav-item">
             <a class="nav-link" href="{% url 'dashboard:duser' %}">Dashboard</a>
           </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="fa fa-bell"></i>
+              <span class="badge text-dark">1</span>
+            </a>
+          </li>
           {% endif %}
           <li class="nav-item">
             <a class="nav-link" href="{% url 'profiles:profile' %}">Profile</a>

@@ -5,6 +5,7 @@ app_name = 'dashboard'
 
 urlpatterns = [
     path('donor/', views.donorDashboard, name='duser'),
+    path('donor/', views.notification, name='ruser'),
 
 ]
 

@@ -4,6 +4,7 @@
 <div class="row mt-5">
     <div class="col-2"></div>
     <div class="col-8 mt-5">
+        {% if duser.selected.exists %}
         {% for ruser in duser.selected.all %}
             <div class="section-top-border">
                 <div class="row mb-3">
@@ -25,6 +26,14 @@
                 </div>
             </div>
         {% endfor %}
+        {% else %}
+        <div class="row text-center m-5" data-aos="zoom-in" data-aos-delay="400">
+            <p class="text-info">No user Added
+        click <a class="btn" href="{% url 'discover:index' %}">here</a> to add user</p>
+            
+        </div>
+        
+        {% endif %}
     </div>
 </div>
 </section>
@@ -32,7 +41,7 @@
 
 {% for reguser in duser.selected.all %}
     <div class="modal fade" id="Reg{{reguser.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-fullscreen" role="document">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header border-0 ">
                     
@@ -40,17 +49,24 @@
               <span aria-hidden="true">×</span>
             </button>
                 </div>
+                {% if reguser.show_info == True or reguser.always_show_info == True %}
                 <div class="modal-body">
-                    <div class="row ">
-                        <div class="col-md-3 mt-md-5">
-                            <div class="text-left" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="row">
+                        <div class="col-3"></div>
+                        <img src="{{reguser.user.profile_picture.url}}" class="col-md-6 img-fluid rounded-circle shadow" style="width: 200px; height: 200px;">
+                    </div>
+                    <div class="row pl-5">
+                        <div class="col-md-6">
+                            <div class="text-left">
                                   <p>Full Name  - <strong>{{reguser.user.first_name}} {{reguser.user.last_name}}</strong> </p>  
-                                  <p>Email - <strong>{{reguser.user.email}}</strong></p>
                                   <p>Gender - <strong>{{reguser.user.gender }}</strong>  </p>
-                                  <p>User-Type  - <strong>{{reguser.user.userType}}</strong></p>
+                                  <p>Email - <strong>{{reguser.user.email}}</strong></p>
+                                  {% if reguser.user.phone_number != None %}
+                                  <p>Phone Number - <strong>{{reguser.user.phone_number }}</strong>  </p>
+                                  {% endif %}
                             </div>
                         </div>
-                        <div class="col-md-3 m-md-5"  data-aos="zoom-in" data-aos-delay="400">
+                        <div class="col-md-6 " >
                             <p>Bio  - <strong>{{reguser.brief_introduction}}</strong> </p>  
                             <p>Age - <strong>{{reguser.age}}</strong></p>
                             <p>Country - <strong>{{reguser.country }}</strong>  </p>
@@ -61,13 +77,17 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                {% else %}
+                <div class="modal-body text-center">
+                    <form action="#">
+                        <button class="btn btn-info">Request user information</button>
+                    </form>
                 </div>
+                {% endif %}
             </div>
         </div>
     </div>
+    
     {% endfor %}
 {% include 'home/footer.html' %}
 
