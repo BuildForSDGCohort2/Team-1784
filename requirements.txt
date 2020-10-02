@@ -7,7 +7,6 @@ httplib2==0.14.0
 Markdown==3.2.2
 Pillow==7.0.0
 whitenoise==5.2.0
-xkit==0.0.0
 django-heroku
 dj-database-url
 sqlparse
