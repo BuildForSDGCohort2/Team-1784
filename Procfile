@@ -1,0 +1,1 @@
+web: gunicorn africansPotential.wsgi --log-file -

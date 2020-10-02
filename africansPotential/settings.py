@@ -1,6 +1,8 @@
 
 from pathlib import Path
 
+import django_heroku
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -9,9 +11,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'mvhg++((4xlmpb^lk)e^dr+yh=5f(w^0h1q)-3w6_kcf!=fjj)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['africans-potential.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
@@ -44,6 +46,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'africansPotential.urls'
@@ -113,11 +116,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 LOCAL_STATIC_CDN_PATH = BASE_DIR / 'static_cdn_test'
-STATIC_ROOT = LOCAL_STATIC_CDN_PATH / 'static'
-
-STATICFILES_DIRS = [
-   BASE_DIR /'staticfiles'
-]
 
 
 MEDIA_URL = '/media/'
@@ -129,3 +127,8 @@ ACCOUNT_EMAIL_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'username'
 ACCOUUNT_EMAIL_VERIFICATION = 'none'
 AUTH_USER_MODEL = 'users.User'
+
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+django_heroku.settings(locals())
