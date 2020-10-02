@@ -2,6 +2,7 @@ from .models import Donor,Grievance, RegularUser, Starred,Type_choice
 from users.models import User
 from django.forms import ModelForm
 from django import forms
+from froala_editor.widgets import FroalaEditor
 
 
 class RegularUserForm(ModelForm):
@@ -71,10 +72,8 @@ class GrievanceForm(ModelForm):
         'placeholder':'Title'
         }))
 
-    body = forms.CharField(label=False,widget=forms.Textarea({
-        'class': 'form-control mb-3',
-        'placeholder': 'Brief description'
-    }))
+    body = forms.CharField(widget=FroalaEditor)
+
     class Meta:
         model = Grievance
         exclude = ('regular_user',)

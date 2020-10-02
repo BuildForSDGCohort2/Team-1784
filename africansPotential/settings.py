@@ -30,6 +30,9 @@ INSTALLED_APPS = [
     'profiles.apps.ProfilesConfig',
     'usersDashboard.apps.UsersdashboardConfig',
     'discover.apps.DiscoverConfig',
+
+    # external app
+    'froala_editor',
     
 ]
 

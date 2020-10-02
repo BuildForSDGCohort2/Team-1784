@@ -26,7 +26,7 @@
 </section>
 <div class="container">
     <div class="row">
-        <div class="col-md-6 mt-5">
+        <div class="col-md-3 mt-5">
             <div class="text-center" data-aos="zoom-in" data-aos-delay="300">
                 <img src="{{ user.profile_picture.url }}" alt="Profile" class="card-img img-fluid">
                 <div data-aos="zoom-in" data-aos-delay="500">
@@ -38,14 +38,14 @@
                  
             </div>
         </div>
-        <div class="col-6 mt-5">
+        <div class="col-9 mt-5">
             <h1 class="text-center" data-aos="fade-out">Help Form</h1>
             <div class=" text-center ">
                 <div class="form-inner">
                     <small class="text-danger ">
                         {{ form.non_field_errors }}
                     </small>
-    
+                    {{ form.media }}
                     <form method="POST" action="{% url 'profiles:guser' %}" enctype="multipart/form-data" class="text-left" data-aos="fade-in" data-aos-delay="400" >{% csrf_token %}
                       {{form.as_p}}
                         <!-- User Type -->

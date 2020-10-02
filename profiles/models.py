@@ -1,5 +1,6 @@
 from django.db import models
 from users.models import User
+from froala_editor.fields import FroalaField
 
 class RegularUser(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name='regular_user')
@@ -38,7 +39,7 @@ class Grievance(models.Model):
     regular_user = models.ForeignKey(RegularUser, on_delete=models.CASCADE, blank=True, null=True)
     thumbnail = models.ImageField(upload_to='thumbnail',blank=True, null=True, default='thumbnail/g-default.jpg')
     title = models.CharField(max_length=500, blank=True, null=True)
-    body = models.TextField(blank=True, null=True)
+    body = FroalaField(blank=True, null=True)
     date = models.DateTimeField(auto_now=True)
  
     def __str__(self):
