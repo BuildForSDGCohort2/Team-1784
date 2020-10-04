@@ -11,7 +11,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'mvhg++((4xlmpb^lk)e^dr+yh=5f(w^0h1q)-3w6_kcf!=fjj)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['africans-potential.herokuapp.com', '127.0.0.1']
 
@@ -48,6 +48,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
      'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 ROOT_URLCONF = 'africansPotential.urls'
 
@@ -134,7 +135,6 @@ ACCOUUNT_EMAIL_VERIFICATION = 'none'
 AUTH_USER_MODEL = 'users.User'
 
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 # django_heroku.settings(locals())
