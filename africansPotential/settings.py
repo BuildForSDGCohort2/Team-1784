@@ -2,7 +2,7 @@
 from pathlib import Path
 import dj_database_url 
 # import django_heroku
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -115,11 +115,16 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
-LOCAL_STATIC_CDN_PATH = BASE_DIR / 'static_cdn_test'
-
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = LOCAL_STATIC_CDN_PATH / 'media'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+ ]
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 
 
 ACCOUNT_UNIQUE_EMAIL =True
