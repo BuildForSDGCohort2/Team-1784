@@ -136,6 +136,7 @@ AUTH_USER_MODEL = 'users.User'
 
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+
 # django_heroku.settings(locals())
 
 
