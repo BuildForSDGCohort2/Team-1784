@@ -22,7 +22,7 @@
             <div class="col-md-6">
                 <h1>{{post.title}}</h1>
                 <small class="m-3">{{post.date}}</small>
-                <p class="mt-4">{{post.body}}</p>
+                <p class="mt-4">{{post.body|safe}}</p>
                 {% if user.userType == 'Donor / organization' %}
                 {% if added %}
                 <form class="form-check-inline" action="{% url 'discover:remove' post.id %}">

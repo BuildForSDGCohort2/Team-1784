@@ -61,7 +61,7 @@
         <img src="{{ g.thumbnail.url }}" class="img-fluid img-rounded" style="height: 300px;"><br>
         <small class="text-muted">{{g.date}}</small>
         <h1 class="h2">{% if g.body %} {{g.title}} {% endif %}</h1>
-        <p>{% if g.body %} {{g.body}} {% else %} Complete your Profile by clicking on the button below {% endif %}</p>
+        <p>{% if g.body %} {{g.body|safe}} {% else %} Complete your Profile by clicking on the button below {% endif %}</p>
         <a href="{% url 'profiles:guser' %}" class="btn btn-dark">Edit My Grievance</a>
         </div>
           <div id="reguserModal" class="modal" role="dialog" aria-labelledby="regUserLabel" aria-hidden="true">
